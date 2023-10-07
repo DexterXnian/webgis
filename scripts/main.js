@@ -10,7 +10,7 @@ if (!localStorage.getItem("name")) {
   setUserName();
 } else {
   let storedName = localStorage.getItem("name");
-  myHeading.textContent = "Mozilla 酷毙了，" + storedName;
+  myHeading.textContent = "Lala land，" + storedName;
 }
 
 let myImage = document.querySelector("img");
@@ -30,7 +30,7 @@ function setUserName() {
     setUserName();
   } else {
     localStorage.setItem("name", myName);
-    myHeading.textContent = "Mozilla 酷毙了，" + myName;
+    myHeading.textContent = "Lala land，" + myName;
   }
 }
 
