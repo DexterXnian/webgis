@@ -1,50 +1,33 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <link href="styles/map.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
-    <style>
-      #map {
-        width: 100%;
-        height: 80vh; /* 使用视口高度，也可以使用具体的像素值 */
-        margin: 0; /* 清除默认的外边距，以确保地图填充整个页面 */
-        padding: 0; /* 清除默认的内边距 */
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>OpenLayers beginner tutorial</title>
+  <link rel="stylesheet" href="ol.css" type="text/css">
+  <script src="ol.js"></script>
+</head>
+
+<body>
+  <div id="map" style="width:100%;height:98vh;"></div>
+  <script>
+      window.onload = function () {
+          new ol.Map({
+              target: 'map',
+              layers: [
+                  new ol.layer.Tile({
+                      source: new ol.source.OSM()
+                  })
+              ],
+              view: new ol.View({
+                  projection: "EPSG:4326",
+                  center: [108.522097, 37.272848],
+                  zoom: 4.7,
+              })
+          });
       }
-      /* #map .ol-zoom-in, #map .ol-zoom-out {
-        background-color: white;
-        color: black;
-      }
-      #map .ol-zoom-extent button {
-          color: blue;
-      }
-      #map .ol-zoomslider {
-          background-color: gray; 
-      }
-      #map .ol-zoomslider button{
-          background-color: black;
-      } */
-      
-    </style>
-    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
-    <title>OpenLayers example</title>
-  </head>
-  <body>
-    <h1>D Map</h1>
-    <div id="map" class="map"></div>
-    <script type="text/javascript">
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([31.41, 121.82]),
-          zoom: 4
-        })
-      });
-      
-    </script>
-  </body>
+  </script>
+</body>
+
+
 </html>
