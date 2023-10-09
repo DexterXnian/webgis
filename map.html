@@ -13,33 +13,48 @@
   <h1>D Map</h1>
   <div id="map" style="width:100%;height: 80vh;"></div>
   <script>
+
     window.onload = function () {
-      new ol.Map({
+      var zoomControl = new ol.control.Zoom();
+      var fullScreenControl = new ol.control.FullScreen();
+      var scaleLineControl = new ol.control.ScaleLine();
+      var terrainLayer = new ol.layer.Tile({
+        source: new ol.source.XYZ({
+          url: 'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png', // WMS服务的URL
+        })
+      });
+
+      var topoLayer = new ol.layer.Tile({
+        source: new ol.source.XYZ({
+          url: 'https://tile.opentopomap.org/{z}/{x}/{y}.png',
+        })
+      })
+
+      var xyzLayer = new ol.layer.Tile({
+        source: new ol.source.XYZ({
+          url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        })
+      });
+
+      var map = new ol.Map({
         target: 'map',
         layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          }),
-
-          new ol.layer.Tile({
-            source: new ol.source.TileWMS({
-              url: 'http://120.27.61.222:8016/geoserver/tdw_testdata/wms',
-              params: { 'LAYERS': 'tdw_testdata:poilayers' },
-              serverType: 'geoserver',
-              crossOrigin: 'anonymous'
-            })
-          })
-
+          // new ol.layer.Tile({
+          //   source: new ol.source.OSM()
+          // }),
+          topoLayer
         ],
         view: new ol.View({
           projection: "EPSG:4326",
           center: [108.522097, 37.272848],
           zoom: 4.7,
-        })
+        }),
+        controls: [zoomControl, fullScreenControl, scaleLineControl]
       });
-    }
+    };
   </script>
 </body>
 
 </script>
+
 </html>
